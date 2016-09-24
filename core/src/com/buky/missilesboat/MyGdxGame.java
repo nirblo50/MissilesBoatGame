@@ -156,7 +156,7 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor
 		float accelY = Gdx.input.getAccelerometerY();		//o the Y tilt of the phone
 		float accelZ = Gdx.input.getAccelerometerZ();		//o the Z tilt of the phone
 
-		//o drawing the little menu of shield num
+		//o  drawing the little menu of shield num
 		shield3.setSize(shield.getSize() / 2);
 		shield3.drawShield(shield3.getSize()/2+10, graphics.getHeight() - shield3.getSize()*3 -shield.getSize() / 3 -boatHeight/2 );
 
