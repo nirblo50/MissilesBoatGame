@@ -74,8 +74,12 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor
 
 	private int highScore;
 
+	private AdHandler handler;
+	private boolean toogle;
 
-
+	public MyGdxGame (AdHandler handler){
+		this.handler = handler;
+	}
 
 
 
@@ -154,7 +158,7 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor
 
 		//o drawing the little menu of shield num
 		shield3.setSize(shield.getSize() / 2);
-		shield3.drawShield(shield3.getSize()/2, graphics.getHeight() - shield3.getSize()*3 -shield.getSize() / 3);
+		shield3.drawShield(shield3.getSize()/2+10, graphics.getHeight() - shield3.getSize()*3 -shield.getSize() / 3 -boatHeight/2 );
 
 		if(!start)
 		{
@@ -164,9 +168,14 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor
 
 		//o drawing score text
 		textBatch.begin();
-		font.draw(textBatch,"Score: "+mone + "\n", 50 , graphics.getHeight()-120);
+		//font.draw(textBatch,"Score: "+mone + "\n", 50 , graphics.getHeight()-120);
 		//o drawing shields text
-		font.draw(textBatch,"X "+shieldNum + "\n", shield3.getSize() + shield.getSize() / 3 , graphics.getHeight() - shield3.getSize()*3 +15 );
+		//font.draw(textBatch,"X "+shieldNum + "\n", shield3.getSize() + shield.getSize() / 3 , graphics.getHeight() - shield3.getSize()*3 +15 );
+
+		font.draw(textBatch,"Score: "+mone + "\n", 50 , graphics.getHeight()-boatHeight);
+		//o drawing shields text
+		font.draw(textBatch,"X "+shieldNum + "\n", shield3.getSize() + shield.getSize() / 3 , graphics.getHeight() - shield3.getSize()*3 +15 -boatHeight/2 );
+
 		textBatch.end();
 
 		//o checking if the game is still being played or player has lost
@@ -279,6 +288,11 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor
 		}
 
 
+		if (Gdx.input.justTouched())
+		{
+			handler.showAds(toogle);
+			toogle = !toogle;
+		}
 
 
 	}
@@ -349,6 +363,7 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button)
 	{
+
 		if(!isGame)
 		{
 			MyGdxGame.this.create();
